@@ -126,3 +126,7 @@ Check the [api](src/main/java/com/dziga/orest/api/ORest.java) for the full list 
 Check [customer example](examples/customer)
 
 ## Planned features
+
+#Licence
+
+[The MIT License (MIT)](LICENCE)
