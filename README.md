@@ -69,6 +69,6 @@ DELETE (status code is always returned)
 
 ### Examples
 
-Check [examples folder](examples)
+Check [customer example](examples/customer)
 
 ## Planned features
