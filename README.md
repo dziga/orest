@@ -12,6 +12,19 @@ Run ```gradle clean install``` and use dependency with group id ```com.dziga```,
 
 ### Out of the box
 
+#### For the impatient
+
+```java
+    ObjectRestClient objectRestClient = new ObjectRestClient("localhost:8080");
+    objectRestClient.addHeader("Content-Type", "application/xml, application/json");
+    objectRestClient.addHeader("Accept", "application/xml, application/json");
+    
+    //simple java bean
+    Customer customer = new Customer();
+
+    customer = (Customer) objectRestClient.getFromService(Customer.class, "/customers/1"));
+```
+
 #### Init 
 
 ```java
@@ -34,7 +47,16 @@ GET (assuming service will give a customer object back)
 
 Client will make the request to server at address ```http://localhost:8080/customers/1```. As we assumed, server will response with object (xml or json format) of Customer type. Client will unmarshall given message to object (Customer.class).
 
+Available get methods:
+
+```java
+    getFromService(Class returningModel, String servicePath, HashMap<String, String> params)
+    getFromService(Class returningModel, String servicePath)
+```
+
 POST (assuming service will give a customer object back)
+
+For POST method, we will define object of Customer.class and fill it with some data. ```postToService``` method expects type of object to post, object itself and type of returning object. 
 
 ```java
     Customer customer = new Customer();
@@ -47,7 +69,21 @@ POST (assuming service will give a customer object back)
     customer = (Customer) objectRestClient.postToService(Customer.class, customer, Customer.class, "/customers");
 ```
 
+In this case, type that we will post and type given back by server are the same, thus we could simply left out return type ```customer = (Customer) objectRestClient.postToService(Customer.class, customer, "/customers")```. Similar to ```getFromService```, client will unmarshall given message to object (Customer.class).
+
+Available post methods:
+
+```java
+    postToService(Class modelClass, Object modelObject, Class returningModel, String servicePath, HashMap<String, String> params)
+    postToService(Class modelClass, Object modelObject, String servicePath, HashMap<String, String> params)
+    postToService(Class modelClass, Object modelObject, Class returningModel, String servicePath)
+    postToService(Class modelClass, Object modelObject, String servicePath)
+```
+
+
 PUT (assuming service will give a customer object back)
+
+Works exactly the same as the post method(s)
 
 ```java
     Customer customer = new Customer();
@@ -61,6 +97,14 @@ PUT (assuming service will give a customer object back)
     customer = (Customer) objectRestClient.postToService(Customer.class, customer, Customer.class, "/customers/1");
 ```
 
+Available put methods:
+
+```java
+    putToService(Class modelClass, Object abstractObject, Class returningClass, String servicePath, HashMap<String, String> params)
+    public Object putToService(Class modelClass, Object abstractObject, String servicePath, HashMap<String, String> params)
+    putToService(Class modelClass, Object abstractObject, Class returningModel, String servicePath) 
+    putToService(Class modelClass, Object abstractObject, String servicePath)
+```
 DELETE (status code is always returned)
 
 ```java
