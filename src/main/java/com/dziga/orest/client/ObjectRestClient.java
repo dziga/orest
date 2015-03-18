@@ -29,10 +29,6 @@ public class ObjectRestClient implements ORest {
     	rest = new HttpRestClient(scheme, host);
     }
 
-    public ObjectRestClient(String scheme, String host, String path) {
-        rest = new HttpRestClient(scheme, host, path);
-    }
-    
 	private enum RequestFormat { 
         json("json"), xml("xml");
            
