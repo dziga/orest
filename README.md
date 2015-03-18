@@ -102,7 +102,7 @@ Available put methods:
 
 ```java
     putToService(Class modelClass, Object abstractObject, Class returningClass, String servicePath, HashMap<String, String> params)
-    public Object putToService(Class modelClass, Object abstractObject, String servicePath, HashMap<String, String> params)
+    putToService(Class modelClass, Object abstractObject, String servicePath, HashMap<String, String> params)
     putToService(Class modelClass, Object abstractObject, Class returningModel, String servicePath) 
     putToService(Class modelClass, Object abstractObject, String servicePath)
 ```
