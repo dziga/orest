@@ -111,6 +111,14 @@ DELETE (status code is always returned)
     objectRestClient.deleteViaService("/customers/1")
 ```
 
+### Check response code and body
+
+Sometimes body and response code are needed to evaluate service response along with unmarshaled object. These can be fetched with:
+
+```java
+    objectRestClient.getResponseCode()
+    objectRestClient.getResponseBody()
+```
 ### Additional settings
 
 oRest out of the box works with some defaults such are
