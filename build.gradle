@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+version = '0.1'
+group = 'com.dziga'
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
+buildscript{
+    repositories{
+        jcenter() 
+        mavenCentral()
+    }
+}
+
+allprojects { 
+	repositories{
+    	mavenCentral()
+	}
+	dependencies {
+		compile 'org.apache.httpcomponents:httpclient:4.3.6'
+		compile 'commons-io:commons-io:2.4'
+		compile 'org.apache.commons:commons-lang3:3.3.2'
+		compile 'org.slf4j:slf4j-api:1.7.10'
+		compile 'org.slf4j:slf4j-simple:1.7.10'
+		compile 'org.json:json:20140107'
+		testCompile 'junit:junit:4.11'
+		testCompile 'com.github.tomakehurst:wiremock:1.53'
+	}
+}

@@ -1,0 +1,42 @@
+apply plugin :'no.nils.wsdl2java'
+
+buildscript{
+    repositories{
+        jcenter() 
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'no.nils:wsdl2java:0.6'
+    }
+}
+
+apply plugin: 'java'
+
+repositories{
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile 'org.apache.httpcomponents:httpclient:4.3.6'
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'org.slf4j:slf4j-api:1.7.10'
+    compile 'org.slf4j:slf4j-simple:1.7.10'
+    compile 'org.json:json:20140107'
+    compile 'com.dziga:orest:0.1'
+    testCompile 'junit:junit:4.11'
+    testCompile 'com.github.tomakehurst:wiremock:1.53'
+}
+
+xsd2java{
+    xsdsToGenerate = [
+        ["$projectDir/src/main/resources/xsd/v1.xsd", "com.dziga.customer.domain.v1"],
+        ["$projectDir/src/main/resources/xsd/v2.xsd", "com.dziga.customer.domain.v2"]
+    ]
+    generatedXsdDir = file("$projectDir/src/generated/java")
+}
+
+sourceSets{
+    main.java.srcDirs +=[wsdl2java.generatedWsdlDir]
+}
