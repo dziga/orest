@@ -32,7 +32,7 @@ GET (assuming service will give a customer object back)
     customer = (Customer) objectRestClient.getFromService(Customer.class, "/customers/1"));
 ```
 
-Client will make the request to server at address
+Client will make the request to server at address ```http://localhost:8080/customers/1```. As we assumed, server will response with object (xml or json format) of Customer type. Client will unmarshall given message to object (Customer.class).
 
 POST (assuming service will give a customer object back)
 
