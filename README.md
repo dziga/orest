@@ -72,6 +72,8 @@ oRest out of the box works with some defaults such are
   - messaging request type ```xml``` that can be set to ```json``` with ```objectRestClient.setRequestType("json");```
   - [namespace URI](http://www.w3schools.com/dom/prop_element_namespaceuri.asp) set to empty string and can be changed with ```objectRestClient.setNamespaceUri("info.about.ql.uri");```
 
+Check the [api](src/main/java/com/dziga/orest/api/ORest.java) for the full list of available methods.
+
 ### Examples
 
 Check [customer example](examples/customer)
