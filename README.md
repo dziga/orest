@@ -14,25 +14,16 @@ Run ```gradle clean install``` and use dependency with group id ```com.dziga```,
 
 #### Init 
 
-  ```ObjectRestClient objectRestClient = new ObjectRestClient("localhost:8080");```
-
+```java
+    ObjectRestClient objectRestClient = new ObjectRestClient("localhost:8080");
+```
 #### Set headers
 
-        ```java
-           objectRestClient.addHeader("Content-Type", "application/xml, application/json");
-           objectRestClient.addHeader("Accept", "application/xml, application/json");
-        ```
-#### Make a request 
-        
 ```java
-    customer.setId(1);
-    customer.setFirstName("John");
-    customer.setLastName("Doe");
-    customer.setSignedContractDate("09-10-2015");
-    customer.setStreet("Backer street");
-    customer.setStreetNumber(3);
-    customer.setCity("London");
+   objectRestClient.addHeader("Content-Type", "application/xml, application/json");
+   objectRestClient.addHeader("Accept", "application/xml, application/json");
 ```
+#### Make a request 
 
 GET (assuming service will give a customer object back)
 
@@ -73,9 +64,11 @@ DELETE (status code is always returned)
 ```java
     objectRestClient.deleteViaService("/customers/1")
 ```
+
 ### Additional settings
 
 ### Examples
 
+Check [examples folder][examples]
 
 ## Planned features
