@@ -127,6 +127,9 @@ Check [customer example](examples/customer)
 
 ## Planned features
 
+ - return headers
+ - more HTTP methods
+
 #Licence
 
 [The MIT License (MIT)](LICENCE)
