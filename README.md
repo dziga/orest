@@ -22,6 +22,7 @@ Run ```gradle clean install``` and use dependency with group id ```com.dziga```,
     //simple java bean
     Customer customer = new Customer();
 
+    // assuming that server will return customer object of Customer.class type
     customer = (Customer) objectRestClient.getFromService(Customer.class, "/customers/1"));
 ```
 
