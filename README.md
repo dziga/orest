@@ -32,6 +32,8 @@ GET (assuming service will give a customer object back)
     customer = (Customer) objectRestClient.getFromService(Customer.class, "/customers/1"));
 ```
 
+Client will make the request to server at address
+
 POST (assuming service will give a customer object back)
 
 ```java
@@ -71,6 +73,7 @@ oRest out of the box works with some defaults such are
 
   - messaging request type ```xml``` that can be set to ```json``` with ```objectRestClient.setRequestType("json");```
   - [namespace URI](http://www.w3schools.com/dom/prop_element_namespaceuri.asp) set to empty string and can be changed with ```objectRestClient.setNamespaceUri("info.about.ql.uri");```
+  - scheme default ```http```, which can be changed on instantiation of the client ```ObjectRestClient objectRestClient = new ObjectRestClient("https", "localhost:8080");```
 
 Check the [api](src/main/java/com/dziga/orest/api/ORest.java) for the full list of available methods.
 
