@@ -35,9 +35,6 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
-/**
- * Created by n.milivojevic on 3/13/2015.
- */
 public interface ORest {
 
     /**
