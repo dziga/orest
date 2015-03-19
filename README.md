@@ -141,4 +141,4 @@ Check [customer example](examples/customer)
 
 #Licence
 
-[The MIT License (MIT)](LICENCE)
+[The MIT License (MIT)](LICENSE)
