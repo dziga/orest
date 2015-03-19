@@ -20,11 +20,23 @@ public class ObjectRestClient implements ORest {
     private int responseCode;
     private RequestFormat requestFormat = RequestFormat.xml;
     private String namespaceUri = "";
-    
+
+    /**
+     * Instantiate new object rest client with host address.
+     *
+     * @param host address
+     */
     public ObjectRestClient(String host) {
     	rest = new HttpRestClient(host);
     }
-    
+
+    /**
+     * Instantiate new object rest client with
+     * schema http(s) and host address.
+     *
+     * @param scheme http/https
+     * @param host address
+     */
     public ObjectRestClient(String scheme, String host) {
     	rest = new HttpRestClient(scheme, host);
     }
@@ -57,66 +69,197 @@ public class ObjectRestClient implements ORest {
         }
     }
 
+    /**
+     * Set request format type. Type to which
+     * object will be marshaled.
+     *
+     * @param requestFormat xml/json
+     */
     public void setRequestType (String requestFormat) {
     	this.requestFormat = RequestFormat.valueOf(requestFormat);
     }
-    
+
+    /**
+     * Add http headers.
+     *
+     * @param headerName header name
+     * @param headerValue header value
+     */
     public void addHeader(String headerName, String headerValue) {
 		rest.addHeader(headerName, headerValue);
 	}
 
+    /**
+     * Set namespace URI.
+     *
+     * @param namespaceUri namespace uri
+     */
     public void setNamespaceUri(String namespaceUri) {
         this.namespaceUri = namespaceUri;
     }
-    
+
+    /**
+     * Get http last response code.
+     *
+     * @return last response code
+     */
     public int getResponseCode () {
         return responseCode;
     }
-    
+
+    /**
+     * Get http last response body.
+     *
+     * @return last response body
+     */
     public String getResponseBody () {
         return rest.getResponseBody();
     }
-    
+
+    /**
+     * Perform GET method to the server with specified parameters.
+     *
+     * @param returningModel type of expected return object
+     * @param servicePath path to resource
+     * @param params url parameters
+     *
+     * @return object who's type matches returningModel
+     */
     public Object getFromService(Class returningModel, String servicePath, HashMap<String, String> params) throws InvalidKeyException, KeyManagementException, NoSuchAlgorithmException, URISyntaxException, IOException, JAXBException, XMLStreamException, JSONException {
         return doRequest(RequestType.GET, null, null, servicePath, params, returningModel);
     }
-    
+
+    /**
+     * Perform GET method to the server with specified parameters.
+     *
+     * @param returningModel type of expected return object
+     * @param servicePath path to resource
+     *
+     * @return object who's type matches returningModel
+     */
     public Object getFromService(Class returningModel, String servicePath) throws InvalidKeyException, KeyManagementException, NoSuchAlgorithmException, URISyntaxException, IOException, JAXBException, XMLStreamException, JSONException {
         return getFromService(returningModel, servicePath, null);
     }
-    
+
+    /**
+     * Perform POST method to the server with specified parameters.
+     *
+     * @param modelClass type of object being posted to service
+     * @param modelObject actual object with values to be posted to service
+     * @param returningModel type of expected return object
+     * @param servicePath path to resource
+     * @param params url parameters
+     *
+     * @return object who's type matches returningModel
+     */
     public Object postToService(Class modelClass, Object modelObject, Class returningModel, String servicePath, HashMap<String, String> params) throws InvalidKeyException, KeyManagementException, NoSuchAlgorithmException, URISyntaxException, IOException, JAXBException, XMLStreamException, JSONException {
         return doRequest(RequestType.POST, modelObject, modelClass,  servicePath, params, returningModel);
     }
-    
+
+    /**
+     * Perform POST method to the server with specified parameters.
+     *
+     * @param modelClass type of object being posted to service (will be used as return model)
+     * @param modelObject actual object with values to be posted to service
+     * @param servicePath path to resource
+     * @param params url parameters
+     *
+     * @return object who's type matches returningModel
+     */
     public Object postToService(Class modelClass, Object modelObject, String servicePath, HashMap<String, String> params) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
         return postToService(modelClass, modelObject, null, servicePath, params);
     }
-    
+
+    /**
+     * Perform POST method to the server with specified parameters.
+     *
+     * @param modelClass type of object being posted to service
+     * @param modelObject actual object with values to be posted to service
+     * @param returningModel type of expected return object
+     * @param servicePath path to resource
+     *
+     * @return object who's type matches returningModel
+     */
     public Object postToService(Class modelClass, Object modelObject, Class returningModel, String servicePath) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
         return postToService(modelClass, modelObject, returningModel, servicePath, null);
     }
-    
+
+    /**
+     * Perform POST method to the server with specified parameters.
+     *
+     * @param modelClass type of object being posted to service (will be used as return model)
+     * @param modelObject actual object with values to be posted to service
+     * @param servicePath path to resource
+     *
+     * @return object who's type matches returningModel
+     */
     public Object postToService(Class modelClass, Object modelObject, String servicePath) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
         return postToService(modelClass, modelObject, null, servicePath, null);
     }
 
-    public Object putToService(Class modelClass, Object abstractObject, Class returningClass, String servicePath, HashMap<String, String> params) throws InvalidKeyException, KeyManagementException, NoSuchAlgorithmException, URISyntaxException, IOException, JAXBException, XMLStreamException, JSONException {
-        return doRequest(RequestType.PUT, abstractObject, modelClass, servicePath, params, returningClass);
+    /**
+     * Perform PUT method to the server with specified parameters.
+     *
+     * @param modelClass type of object being posted to service
+     * @param modelObject actual object with values to be posted to service
+     * @param returningModel type of expected return object
+     * @param servicePath path to resource
+     * @param params url parameters
+     *
+     * @return object who's type matches returningModel
+     */
+    public Object putToService(Class modelClass, Object modelObject, Class returningModel, String servicePath, HashMap<String, String> params) throws InvalidKeyException, KeyManagementException, NoSuchAlgorithmException, URISyntaxException, IOException, JAXBException, XMLStreamException, JSONException {
+        return doRequest(RequestType.PUT, modelObject, modelClass, servicePath, params, returningModel);
     }
-    
-    public Object putToService(Class modelClass, Object abstractObject, String servicePath, HashMap<String, String> params) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
-        return putToService(modelClass, abstractObject, null, servicePath, params);
+
+    /**
+     * Perform PUT method to the server with specified parameters.
+     *
+     * @param modelClass type of object being posted to service (will be used as return model)
+     * @param modelObject actual object with values to be posted to service
+     * @param servicePath path to resource
+     * @param params url parameters
+     *
+     * @return object who's type matches returningModel
+     */
+    public Object putToService(Class modelClass, Object modelObject, String servicePath, HashMap<String, String> params) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
+        return putToService(modelClass, modelObject, null, servicePath, params);
     }
-    
-    public Object putToService(Class modelClass, Object abstractObject, Class returningModel, String servicePath) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
-        return putToService(modelClass, abstractObject, returningModel, servicePath, null);
+
+    /**
+     * Perform PUT method to the server with specified parameters.
+     *
+     * @param modelClass type of object being posted to service
+     * @param modelObject actual object with values to be posted to service
+     * @param returningModel type of expected return object
+     * @param servicePath path to resource
+     *
+     * @return object who's type matches returningModel
+     */
+    public Object putToService(Class modelClass, Object modelObject, Class returningModel, String servicePath) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
+        return putToService(modelClass, modelObject, returningModel, servicePath, null);
     }
-    
-    public Object putToService(Class modelClass, Object abstractObject, String servicePath) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
-        return putToService(modelClass, abstractObject, null, servicePath, null);
+
+    /**
+     * Perform PUT method to the server with specified parameters.
+     *
+     * @param modelClass type of object being posted to service (will be used as return model)
+     * @param modelObject actual object with values to be posted to service
+     * @param servicePath path to resource
+     *
+     * @return object who's type matches returningModel
+     */
+    public Object putToService(Class modelClass, Object modelObject, String servicePath) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
+        return putToService(modelClass, modelObject, null, servicePath, null);
     }
-    
+
+    /**
+     * Perform DELETE method to the server with specified parameters.
+     *
+     * @param servicePath path to resource
+     *
+     * @return response code
+     */
     public int deleteViaService(String servicePath) throws InvalidKeyException, KeyManagementException, NoSuchAlgorithmException, URISyntaxException, IOException, JAXBException, XMLStreamException, JSONException {
         doRequest(RequestType.DELETE, null, null, servicePath, null, null);
         return responseCode;
