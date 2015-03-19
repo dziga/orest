@@ -6,7 +6,7 @@
 //
 
 
-package com.dziga.orest.test.client.domain;
+package com.github.dziga.orest.test.client.domain;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

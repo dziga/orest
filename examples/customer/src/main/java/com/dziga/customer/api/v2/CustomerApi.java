@@ -2,7 +2,7 @@ package com.dziga.customer.api.v2;
 
 import com.dziga.customer.domain.v2.Customer;
 import com.dziga.customer.domain.v2.ObjectFactory;
-import com.dziga.orest.client.ObjectRestClient;
+import com.github.dziga.orest.client.ObjectRestClient;
 import org.json.JSONException;
 
 import javax.xml.bind.JAXBException;

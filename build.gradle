@@ -1,10 +1,11 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
+
+group = 'com.github.dziga'
 version = '0.1'
-group = 'com.dziga'
-sourceCompatibility = JavaVersion.VERSION_1_6
-targetCompatibility = JavaVersion.VERSION_1_6
+archivesBaseName = 'orest'
 
 buildscript{
     repositories{
@@ -27,4 +28,67 @@ allprojects {
 		testCompile 'junit:junit:4.11'
 		testCompile 'com.github.tomakehurst:wiremock:1.53'
 	}
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Example Application'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'oRest is a simple utility for (un)marshaling java objects while consuming RESTful web service'
+                url 'https://github.com/dziga/orest'
+
+                scm {
+                    connection 'scm:git:https://github.com/dziga/orest.git'
+                    developerConnection 'scm:git:https://github.com/dziga/orest.git'
+                    url 'https://github.com/dziga/orest'
+                }
+
+                licenses {
+                    license {
+                        name 'MIT License'
+                        url 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'dziga'
+                        name 'Nikola Milivojevic'
+                        email '0dziga0@gmail.com'
+                    }
+                }
+            }
+        }
+    }
 }
