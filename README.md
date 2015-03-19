@@ -6,7 +6,7 @@ oRest is a simple utility for (un)marshaling java objects while consuming RESTfu
 
 Installation requires [gradle](https://gradle.org/) installed.
 
-Run ```gradle clean install``` and use dependency with group id ```com.dziga```, artifact id ```orest``` and current version ```0.1```
+Run ```gradle clean install``` and use dependency with group id ```com.github.dziga```, artifact id ```orest``` and current version ```0.1```
 
 ## Usage
 
