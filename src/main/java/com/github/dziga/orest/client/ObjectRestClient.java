@@ -1,4 +1,4 @@
-package com.dziga.orest.client;
+package com.github.dziga.orest.client;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
-import com.dziga.orest.api.ORest;
+import com.github.dziga.orest.api.ORest;
 import org.json.JSONException;
 
 public class ObjectRestClient implements ORest {

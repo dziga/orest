@@ -1,8 +1,8 @@
-package com.dziga.orest.test.client;
+package com.github.dziga.orest.test.client;
 
-import com.dziga.orest.client.ObjectRestClient;
-import com.dziga.orest.test.client.api.RestEndpoints;
-import com.dziga.orest.test.client.domain.Customer;
+import com.github.dziga.orest.client.ObjectRestClient;
+import com.github.dziga.orest.test.client.api.RestEndpoints;
+import com.github.dziga.orest.test.client.domain.Customer;
 import com.github.tomakehurst.wiremock.common.Slf4jNotifier;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.json.JSONException;

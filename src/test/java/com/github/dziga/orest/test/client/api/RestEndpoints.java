@@ -1,4 +1,4 @@
-package com.dziga.orest.test.client.api;
+package com.github.dziga.orest.test.client.api;
 
 public class RestEndpoints {
 	public static final String HOST = "localhost:8089";

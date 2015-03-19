@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 version = '0.1'
-group = 'com.dziga'
+group = 'com.github.dziga'
 sourceCompatibility = JavaVersion.VERSION_1_6
 targetCompatibility = JavaVersion.VERSION_1_6
 

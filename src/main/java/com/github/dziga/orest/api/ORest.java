@@ -1,4 +1,4 @@
-package com.dziga.orest.api;
+package com.github.dziga.orest.api;
 
 import org.json.JSONException;
 

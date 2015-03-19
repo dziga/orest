@@ -1,4 +1,4 @@
-package com.dziga.orest.client;
+package com.github.dziga.orest.client;
 
 import java.io.IOException;
 import java.net.URI;

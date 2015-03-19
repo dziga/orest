@@ -1,4 +1,4 @@
-package com.dziga.orest.test.client;
+package com.github.dziga.orest.test.client;
 
 public class TestConstants {
 
