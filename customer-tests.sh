@@ -1,1 +1,1 @@
-cd examples/customer && ./gradlew cleanTest test
+./gradlew install && cd examples/customer && ./gradlew cleanTest test

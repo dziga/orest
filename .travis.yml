@@ -1,2 +1,2 @@
 language: java
-#script: "./customer-tests.sh"
+script: "./customer-tests.sh"
