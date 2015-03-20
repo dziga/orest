@@ -2,6 +2,7 @@ package com.dziga.customer.api.v2;
 
 import com.dziga.customer.domain.v2.Address;
 import com.dziga.customer.domain.v2.Customer;
+import com.dziga.customer.domain.v2.CustomerList;
 import com.dziga.customer.domain.v2.ObjectFactory;
 import com.github.dziga.orest.client.ObjectRestClient;
 import org.json.JSONException;
@@ -14,11 +15,14 @@ import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerApi {
 	
 	private ObjectRestClient objectRestClient;
 	private Customer customer;
+    private CustomerList customers;
     private Address address;
 	private ObjectFactory objectFactory = new ObjectFactory();
 	private String requestFormat = "xml";
@@ -28,6 +32,7 @@ public class CustomerApi {
 		objectRestClient.addHeader("Content-Type", "application/xml, application/json");
 		objectRestClient.addHeader("Accept", "application/xml, application/json");
 		customer = objectFactory.createCustomer();
+        customers = objectFactory.createCustomerList();
         address = objectFactory.createAddress();
 	}
 	
@@ -88,7 +93,15 @@ public class CustomerApi {
 	public int deleteCustomer() throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
 		return objectRestClient.deleteViaService(String.format(RestEndpoints.CUSTOMER, customer.getId()));
 	}
-	
+
+    public void getCustomers() throws NoSuchAlgorithmException, KeyManagementException, JAXBException, URISyntaxException, XMLStreamException, InvalidKeyException, IOException {
+        customers = (CustomerList)objectRestClient.getFromService(CustomerList.class, RestEndpoints.CUSTOMER_LIST);
+    }
+
+    public void getCustomerFromList(int order) {
+        customer = customers.getCustomer().get(order);
+    }
+
 	public long getCustomerId() {
 		return customer.getId();
 	}

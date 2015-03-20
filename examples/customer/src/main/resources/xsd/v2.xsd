@@ -6,7 +6,7 @@
 
 	<xs:complexType name="CustomerList">
     		<xs:sequence>
-      			<xs:element ref="Customer"/>
+      			<xs:element ref="Customer" minOccurs="0" maxOccurs="unbounded"/>
       		</xs:sequence>
     </xs:complexType>
     
