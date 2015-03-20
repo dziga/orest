@@ -1,5 +1,6 @@
 package com.dziga.customer.api.v2;
 
+import com.dziga.customer.domain.v2.Address;
 import com.dziga.customer.domain.v2.Customer;
 import com.dziga.customer.domain.v2.ObjectFactory;
 import com.github.dziga.orest.client.ObjectRestClient;
@@ -18,6 +19,7 @@ public class CustomerApi {
 	
 	private ObjectRestClient objectRestClient;
 	private Customer customer;
+    private Address address;
 	private ObjectFactory objectFactory = new ObjectFactory();
 	private String requestFormat = "xml";
 	
@@ -26,6 +28,7 @@ public class CustomerApi {
 		objectRestClient.addHeader("Content-Type", "application/xml, application/json");
 		objectRestClient.addHeader("Accept", "application/xml, application/json");
 		customer = objectFactory.createCustomer();
+        address = objectFactory.createAddress();
 	}
 	
 	public void setCustomerRequestFormat(String requestFormat) {
@@ -49,20 +52,24 @@ public class CustomerApi {
 	}
 	
 	public void setCustomerStreet(String street) {
-		customer.setStreet(street);
+		address.setStreet(street);
 	}
 	
 	public void setCustomerStreetNumber(int number) {
-		customer.setStreetNumber(number);
+        address.setStreetNumber(number);
 	}
 	
 	public void setCustomerCity(String city) {
-		customer.setCity(city);
+        address.setCity(city);
 	}
 	
 	public void setCustomerPostalCode(Integer postCode) {
-		customer.setPostalCode(BigInteger.valueOf(postCode));
+        address.setPostalCode(BigInteger.valueOf(postCode));
 	}
+
+    public void setCustomerAddress() {
+        customer.setAddress(address);
+    }
 	
 	public void getCustomer() throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
 		customer = (Customer) objectRestClient.getFromService(Customer.class, String.format(RestEndpoints.CUSTOMER, customer.getId()));
@@ -99,18 +106,18 @@ public class CustomerApi {
 	}
 	
 	public String getCustomerStreet() {
-		return customer.getStreet();
+		return customer.getAddress().getStreet();
 	}
 	
 	public int getCustomerStreetNumber() {
-		return customer.getStreetNumber();
+		return customer.getAddress().getStreetNumber();
 	}
 	
 	public String getCustomerCity() {
-		return customer.getCity();
+		return customer.getAddress().getCity();
 	}
 	
 	public Integer getCustomerPostalCode() {
-		return (int) customer.getPostalCode().longValue();
+		return (int) customer.getAddress().getPostalCode().longValue();
 	}
 }
