@@ -55,10 +55,11 @@ public class CustomerApiJsonTest {
 							"\"FirstName\":\"John\"," +
 							"\"LastName\":\"Doe\"," +
 							"\"SignedContractDate\": \"09-10-2015\"," +
+                            "\"Address\": {" +
 							"\"Street\":\"Backer street\"," +
 							"\"StreetNumber\": \"3\"," +
 							"\"City\":\"London\"," +
-							"\"PostalCode\":\"20002\"}}"
+							"\"PostalCode\":\"20002\"}}}"
 							)));
 	}
 	
@@ -73,7 +74,8 @@ public class CustomerApiJsonTest {
 		customer.setCustomerStreetNumber(3);
 		customer.setCustomerCity("London");
 		customer.setCustomerPostalCode(20002);
-		
+        customer.setCustomerAddress();
+
 		customer.setCustomerRequestFormat("json");
 		customer.createNewCustomer();
 		

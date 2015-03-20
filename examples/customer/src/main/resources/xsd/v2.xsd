@@ -16,10 +16,16 @@
       			<xs:element name="FirstName" type="xs:string"/>
       			<xs:element name="LastName" type="xs:string"/>
       			<xs:element name="SignedContractDate" type="xs:string"/>
-      			<xs:element name="Street" type="xs:string"/>
-      			<xs:element name="StreetNumber" type="xs:int"/>
-      			<xs:element name="City" type="xs:string"/>
-      			<xs:element name="PostalCode" type="xs:integer"/>
+      			<xs:element name="Address" type="Address"/>
       		</xs:sequence>
      </xs:complexType>
+
+    <xs:complexType name="Address">
+        <xs:sequence>
+            <xs:element name="Street" type="xs:string"/>
+            <xs:element name="StreetNumber" type="xs:int"/>
+            <xs:element name="City" type="xs:string"/>
+            <xs:element name="PostalCode" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

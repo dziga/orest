@@ -65,6 +65,7 @@ public class CustomerApiTest {
 		customer.setCustomerStreetNumber(3);
 		customer.setCustomerCity("London");
 		customer.setCustomerPostalCode(20002);
+        customer.setCustomerAddress();
 		
 		customer.createNewCustomer();
 		
@@ -90,7 +91,8 @@ public class CustomerApiTest {
 		customer.setCustomerStreetNumber(3);
 		customer.setCustomerCity("London");
 		customer.setCustomerPostalCode(20002);
-		
+		customer.setCustomerAddress();
+
 		customer.editCustomer();
 		
 		Assert.assertEquals(2, customer.getCustomerId());
@@ -127,10 +129,12 @@ public class CustomerApiTest {
 	                            + "<FirstName>John</FirstName>"
 	                            + "<LastName>Doe</LastName>"
 	                            + "<SignedContractDate>09-10-2015</SignedContractDate>"
+                                + "<Address>"
 	                            + "<Street>Backer street</Street>"
 	                            + "<StreetNumber>3</StreetNumber>"
 	                            + "<City>London</City>"
 	                            + "<PostalCode>200002</PostalCode>"
+                                + "</Address>"
 	                            + "</Customer>")));
 		
 		stubFor(post(urlEqualTo("/v2/customers")).withHeader("Accept", containing("application/xml"))
@@ -139,10 +143,12 @@ public class CustomerApiTest {
 	                            + ".*<FirstName>John</FirstName>.*"
                         		+ ".*<LastName>Doe</LastName>.*" 
                         		+ ".*<SignedContractDate>09-10-2015</SignedContractDate>.*"
+                                + ".*<Address>.*"
 	                            + ".*<Street>Backer street</Street>.*"
 	                            + ".*<StreetNumber>3</StreetNumber>.*"
 	                            + ".*<City>London</City>.*"
 	                            + ".*<PostalCode>20002</PostalCode>.*"
+                                + ".*</Address>.*"
 	                            + ".*</Customer>.*"
 						))
 				.willReturn(
@@ -156,10 +162,12 @@ public class CustomerApiTest {
 	                            + "<FirstName>John</FirstName>"
 	                            + "<LastName>Doe</LastName>"
 	                            + "<SignedContractDate>09-10-2015</SignedContractDate>"
+                                + "<Address>"
 	                            + "<Street>Backer street</Street>"
 	                            + "<StreetNumber>3</StreetNumber>"
 	                            + "<City>London</City>"
 	                            + "<PostalCode>200002</PostalCode>"
+                                + "</Address>"
 	                            + "</Customer>")));
 		
 		stubFor(put(urlEqualTo("/v2/customers/2")).withHeader("Accept", containing("application/xml"))
@@ -169,10 +177,12 @@ public class CustomerApiTest {
 	                            + ".*<FirstName>John</FirstName>.*"
                         		+ ".*<LastName>Doe</LastName>.*" 
                         		+ ".*<SignedContractDate>09-10-2015</SignedContractDate>.*"
+                                + ".*<Address>.*"
 	                            + ".*<Street>Backer street</Street>.*"
 	                            + ".*<StreetNumber>3</StreetNumber>.*"
 	                            + ".*<City>London</City>.*"
 	                            + ".*<PostalCode>20002</PostalCode>.*"
+                                + ".*</Address>.*"
 	                            + ".*</Customer>.*"
 						))
 				.willReturn(
@@ -186,10 +196,12 @@ public class CustomerApiTest {
 	                            + "<FirstName>John</FirstName>"
 	                            + "<LastName>Doe</LastName>"
 	                            + "<SignedContractDate>09-10-2015</SignedContractDate>"
+                                + "<Address>"
 	                            + "<Street>Backer street</Street>"
 	                            + "<StreetNumber>3</StreetNumber>"
 	                            + "<City>London</City>"
 	                            + "<PostalCode>200002</PostalCode>"
+                                + "</Address>"
 	                            + "</Customer>")));
 		
 		stubFor(delete(urlEqualTo("/v2/customers/5")).withHeader("Accept", containing("application/xml"))
