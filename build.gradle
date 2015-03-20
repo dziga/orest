@@ -45,6 +45,7 @@ artifacts {
 }
 
 signing {
+    required {hasProperty('secretKeyRingFile')}
     sign configurations.archives
 }
 
