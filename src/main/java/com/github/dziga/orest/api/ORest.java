@@ -34,6 +34,8 @@ import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public interface ORest {
 
@@ -42,22 +44,22 @@ public interface ORest {
      * object will be marshaled.
      * Request type can be 'xml' or 'json'.
      *
-     * @param requestFormat
+     * @param requestFormat xml/json
      */
     public void setRequestType (String requestFormat);
 
     /**
      * Add http headers.
      *
-     * @param headerName
-     * @param headerValue
+     * @param headerName header name
+     * @param headerValue header value
      */
     public void addHeader(String headerName, String headerValue);
 
     /**
      * Set namespace URI.
      *
-     * @param namespaceUri
+     * @param namespaceUri namespace uri
      */
     public void setNamespaceUri(String namespaceUri);
 
@@ -74,6 +76,29 @@ public interface ORest {
      * @return last response body
      */
     public String getResponseBody ();
+
+    /**
+     * Check if last response contains header.
+     *
+     * @param name header name
+     * @return header with name exists
+     */
+    public boolean lastResponseContainsHeader(String name);
+
+    /**
+     * Get list of header values by name.
+     *
+     * @param name header name
+     * @return list of header values
+     */
+    public List<String> getLastResponseHeaderValues (String name);
+
+    /**
+     * Get all headers from last response.
+     *
+     * @return all headers from last response in key value pairs
+     */
+    public Map<String, String> getLastResponseHeaders ();
 
     /**
      * Perform GET method to the server with specified parameters.

@@ -58,11 +58,10 @@ class HttpRestClient {
 	private String host;
 	private String path;
 	private String responseBody;
-	private int responseStatusCode;
+    private HttpResponse lastResponse;
 
-	
-	
-	public HttpRestClient(String scheme, String host, String path) {
+
+    public HttpRestClient(String scheme, String host, String path) {
 		this.scheme = scheme;
 		this.host = host;
 		this.path = path;
@@ -90,7 +89,7 @@ class HttpRestClient {
 		getMethod = (HttpGet) addHeadersToMethod(getMethod);
 
 		processResponse(httpClient.execute(getMethod));
-		return responseStatusCode;
+		return getResponseCode();
 	}
 
 	public int Post(String body) throws URISyntaxException, IOException {
@@ -104,7 +103,7 @@ class HttpRestClient {
 
         processResponse(httpClient.execute(postMethod));
 
-        return responseStatusCode;
+        return getResponseCode();
 	}
 
 	public int Put(String body) throws IOException, URISyntaxException {
@@ -118,7 +117,7 @@ class HttpRestClient {
 
         processResponse(httpClient.execute(putMethod));
 
-        return responseStatusCode;
+        return getResponseCode();
 	}
 
 	public int Delete() throws IOException, URISyntaxException {
@@ -129,7 +128,7 @@ class HttpRestClient {
 		deleteMethod = (HttpDelete) addHeadersToMethod(deleteMethod);
 		processResponse(httpClient.execute(deleteMethod));
 
-		return responseStatusCode;
+		return getResponseCode();
 	}
 
 	public void addHeader(String headerName, String headerValue) {
@@ -158,6 +157,26 @@ class HttpRestClient {
 		return responseBody;
 	}
 
+    public boolean containsHeader(String name) {
+        return lastResponse.containsHeader(name);
+    }
+
+    public List<String> getResponseHeaderValues(String name) {
+        List<String> values = new ArrayList<String>();
+        for (Header header: lastResponse.getHeaders(name)) {
+            values.add(header.getValue());
+        }
+        return values;
+    }
+
+    public Map<String, String> getResponseHeaders() {
+        HashMap<String, String> pair = new HashMap<String, String>();
+        for (Header header: lastResponse.getAllHeaders()) {
+            pair.put(header.getName(), header.getValue());
+        }
+        return pair;
+    }
+
 	private HttpRequestBase addHeadersToMethod(HttpRequestBase method) {
 		for (Header h : headers) {
 			method.addHeader(h.getName(), h.getValue());
@@ -172,9 +191,13 @@ class HttpRestClient {
 	}
 	
 	private void processResponse(HttpResponse response) throws IOException {
-        responseStatusCode = response.getStatusLine().getStatusCode();
+        lastResponse = response;
         HttpEntity entity = response.getEntity();
         responseBody = EntityUtils.toString(entity);
+    }
+
+    private int getResponseCode() {
+        return lastResponse.getStatusLine().getStatusCode();
     }
 
 }
