@@ -1,4 +1,4 @@
-# oRest
+# oRest [![Travis](https://img.shields.io/travis/dziga/orest.svg)]()
 
 oRest is a simple utility for (un)marshaling java objects while consuming RESTful web service.
 
