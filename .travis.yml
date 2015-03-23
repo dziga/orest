@@ -9,11 +9,11 @@ env:
 addons:
   coverity_scan:
     project:
-      name: "oRest"
+      name: "dziga/orest"
       description: "Simple java library for consuming rest services with java objects"
     notification_email: 0dziga0@gmail.com
     # build_command_prepend: "<Your build preprocessing command here>"
     build_command:   "gradle build"
     branch_pattern: master
-    
+
 script: "./customer-tests.sh"
