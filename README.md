@@ -12,7 +12,7 @@ Use dependency with group id ```com.github.dziga```, artifact id ```orest``` and
 
 Installation requires [gradle](https://gradle.org/) installed.
 
-Run ```gradle clean install``` and use dependency with group id ```com.github.dziga```, artifact id ```orest``` and current version ```0.1```
+Run ```gradle clean install``` and use dependency with group id ```com.github.dziga```, artifact id ```orest``` and current version ```0.2-SNAPSHOT```
 
 ## Usage
 
