@@ -30,6 +30,8 @@ import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.bind.JAXBException;
@@ -138,6 +140,35 @@ public class ObjectRestClient implements ORest {
      */
     public String getResponseBody () {
         return rest.getResponseBody();
+    }
+
+    /**
+     * Check if last response contains header.
+     *
+     * @param name header name
+     * @return header with name exists
+     */
+    public boolean lastResponseContainsHeader(String name) {
+        return rest.containsHeader(name);
+    }
+
+    /**
+     * Get list of header values by name.
+     *
+     * @param name header name
+     * @return list of header values
+     */
+    public List<String> getLastResponseHeaderValues (String name) {
+        return rest.getResponseHeaderValues(name);
+    }
+
+    /**
+     * Get all headers from last response.
+     *
+     * @return all headers from last response in key value pairs
+     */
+    public Map<String, String> getLastResponseHeaders () {
+        return rest.getResponseHeaders();
     }
 
     /**
