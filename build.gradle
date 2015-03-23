@@ -63,7 +63,7 @@ uploadArchives {
             }
 
             pom.project {
-                name 'Example Application'
+                name 'oRest'
                 packaging 'jar'
                 // optionally artifactId can be defined here
                 description 'oRest is a simple utility for (un)marshaling java objects while consuming RESTful web service'
