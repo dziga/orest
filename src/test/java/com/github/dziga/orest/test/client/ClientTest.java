@@ -24,6 +24,7 @@
 
 package com.github.dziga.orest.test.client;
 
+import com.github.dziga.orest.api.ORest;
 import com.github.dziga.orest.client.ObjectRestClient;
 import com.github.dziga.orest.test.client.api.RestEndpoints;
 import com.github.dziga.orest.test.client.domain.Customer;
@@ -54,7 +55,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 @SuppressWarnings("unused")
 public class ClientTest {
 
-    private ObjectRestClient objectRestClient;
+    private ORest objectRestClient;
 
 	@Rule
 	public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8089).notifier(
