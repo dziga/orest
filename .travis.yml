@@ -17,6 +17,6 @@ addons:
     branch_pattern: master
 
 after_success:
-- ./gradlew cobertura coveralls --exclude-pattern **/Orest.java
+- ./gradlew cobertura coveralls
 
 script: "./customer-tests.sh"
