@@ -168,6 +168,22 @@ public class ClientTest {
         Assert.assertEquals(expectedContentTypeHeaders, objectRestClient.getLastResponseHeaderValues("Content-Type"));
         Assert.assertEquals(2, allExpectedHeaders.size());
     }
+
+    @Test
+    public void responseCodeAndBody() throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
+
+        ObjectRestClient objectRestClient = new ObjectRestClient(RestEndpoints.HOST);
+        objectRestClient.addHeader("Content-Type", "application/xml, application/json");
+        objectRestClient.addHeader("Accept", "application/xml, application/json");
+        Customer customer = new Customer();
+        customer.setId(3);
+
+        customer = (Customer) objectRestClient.getFromService(Customer.class, String.format(RestEndpoints.CUSTOMER, customer.getId()));
+
+        Assert.assertEquals(3, customer.getId());
+        Assert.assertFalse(objectRestClient.getResponseBody().isEmpty());
+        Assert.assertEquals(200, objectRestClient.getResponseCode());
+    }
 	
 	@Before
 	public void setUp() {
