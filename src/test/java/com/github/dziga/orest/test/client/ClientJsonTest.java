@@ -48,7 +48,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
 @SuppressWarnings("unused")
-public class CustomerApiJsonTest {
+public class ClientJsonTest {
 	
 	@Rule
 	public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8089).notifier(
