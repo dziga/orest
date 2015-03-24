@@ -61,20 +61,20 @@ class HttpRestClient {
     private HttpResponse lastResponse;
 
 
-	public HttpRestClient(String host, String path) {
+	HttpRestClient(String host, String path) {
 		this.host = host;
 		this.path = path;
 	}
 	
-	public HttpRestClient(String host) {
+	HttpRestClient(String host) {
 		this.host = host;
 	}
 	
-	public void setRequestPath(String path) {
+	void setRequestPath(String path) {
 		this.path = path.trim();
 	}
 
-	public int Get() throws IOException, URISyntaxException,
+	int Get() throws IOException, URISyntaxException,
 			NoSuchAlgorithmException, InvalidKeyException {
 		URIBuilder b = new URIBuilder().setScheme(scheme).setHost(host).setPath(path);
 		addQueryParams(b);
@@ -86,7 +86,7 @@ class HttpRestClient {
 		return getResponseCode();
 	}
 
-	public int Post(String body) throws URISyntaxException, IOException {
+	int Post(String body) throws URISyntaxException, IOException {
 		URIBuilder b = new URIBuilder().setScheme(scheme).setHost(host).setPath(path);
         addQueryParams(b);
         URI fullUri = b.build();
@@ -100,7 +100,7 @@ class HttpRestClient {
         return getResponseCode();
 	}
 
-	public int Put(String body) throws IOException, URISyntaxException {
+	int Put(String body) throws IOException, URISyntaxException {
 		URIBuilder b = new URIBuilder().setScheme(scheme).setHost(host).setPath(path);
         addQueryParams(b);
         URI fullUri = b.build();
@@ -114,7 +114,7 @@ class HttpRestClient {
         return getResponseCode();
 	}
 
-	public int Delete() throws IOException, URISyntaxException {
+	int Delete() throws IOException, URISyntaxException {
 		URIBuilder uriBuilder = new URIBuilder().setScheme(scheme).setHost(host).setPath(path);
 		addQueryParams(uriBuilder);
 		URI fullUri = uriBuilder.build();
@@ -125,7 +125,7 @@ class HttpRestClient {
 		return getResponseCode();
 	}
 
-	public void addHeader(String headerName, String headerValue) {
+	void addHeader(String headerName, String headerValue) {
 		Header foundHeader = null;
 		for (Header header : headers) {
 			if (StringUtils.equalsIgnoreCase(header.getName(), headerName)) {
@@ -139,23 +139,23 @@ class HttpRestClient {
 		headers.add(new BasicHeader(headerName, headerValue));
 	}
 	
-	public void addQueryParameter(String key, String value) {
+	void addQueryParameter(String key, String value) {
 		queryParams.put(key, value);
 	}
 	
-	public void removeAllQueryParameters() {
+	void removeAllQueryParameters() {
 		queryParams.clear();
 	}
 
-	public String getResponseBody() {
+	String getResponseBody() {
 		return responseBody;
 	}
 
-    public boolean containsHeader(String name) {
+    boolean containsHeader(String name) {
         return lastResponse.containsHeader(name);
     }
 
-    public List<String> getResponseHeaderValues(String name) {
+    List<String> getResponseHeaderValues(String name) {
         List<String> values = new ArrayList<String>();
         for (Header header: lastResponse.getHeaders(name)) {
             values.add(header.getValue());
@@ -163,7 +163,7 @@ class HttpRestClient {
         return values;
     }
 
-    public Map<String, String> getResponseHeaders() {
+    Map<String, String> getResponseHeaders() {
         HashMap<String, String> pair = new HashMap<String, String>();
         for (Header header: lastResponse.getAllHeaders()) {
             pair.put(header.getName(), header.getValue());

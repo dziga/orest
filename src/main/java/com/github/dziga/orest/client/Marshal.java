@@ -42,7 +42,7 @@ import org.json.XML;
 
 class Marshal {
 
-    public static String toXml (Object modelObject, Class modelClass, String namespaceURI) throws JAXBException {
+    static String toXml (Object modelObject, Class modelClass, String namespaceURI) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(modelClass);
 
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -55,7 +55,7 @@ class Marshal {
         return writer.toString();
     }
 
-    public static Object toObject (String input, Class modelClass) throws JAXBException, XMLStreamException, JSONException {
+    static Object toObject (String input, Class modelClass) throws JAXBException, XMLStreamException, JSONException {
         if (input == null || input.isEmpty()) {
             return new Object();
         }
@@ -69,7 +69,7 @@ class Marshal {
         return unmarshaller.unmarshal(new StreamSource(new StringReader(input)), modelClass).getValue();
     }
 	
-	public static String toJson (Object modelObject, Class modelClass, String namespaceURI) throws JAXBException, JSONException {
+	static String toJson (Object modelObject, Class modelClass, String namespaceURI) throws JAXBException, JSONException {
 		String xml = toXml(modelObject, modelClass, namespaceURI);
 		JSONObject json = XML.toJSONObject(xml);
         return json.toString();
