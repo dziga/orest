@@ -38,6 +38,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 
 import com.github.dziga.orest.api.ORest;
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import org.json.JSONException;
 
 public class ObjectRestClient implements ORest {
@@ -320,7 +322,7 @@ public class ObjectRestClient implements ORest {
         return responseCode;
     }
 
-    private Object doRequest(RequestType requestType, Object modelObject, Class modelClass, String servicePath, HashMap<String, String> params, Class returningModel) throws InvalidKeyException, NoSuchAlgorithmException, URISyntaxException, IOException, JAXBException, KeyManagementException, XMLStreamException, JSONException {
+    private Object doRequest(@NotNull RequestType requestType, @NotNull Object modelObject, Class modelClass, @NotNull String servicePath, @Nullable HashMap<String, String> params, @Nullable Class returningModel) throws InvalidKeyException, NoSuchAlgorithmException, URISyntaxException, IOException, JAXBException, KeyManagementException, XMLStreamException, JSONException {
     	if (params != null && !(params.isEmpty())) {
             for (Entry<String, String> param : params.entrySet()) {
             	rest.addQueryParameter(param.getKey(), param.getValue());
