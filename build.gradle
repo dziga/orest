@@ -20,6 +20,7 @@ buildscript{
 }
 
 cobertura.coverageFormats = ['html', 'xml']
+cobertura.coverageExcludes = ['.*com.github.dziga.orest.api.*']
 
 allprojects { 
 	repositories{
