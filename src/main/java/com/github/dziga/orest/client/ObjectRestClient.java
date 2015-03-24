@@ -249,7 +249,7 @@ public class ObjectRestClient implements ORest {
      * @return object who's type matches returningModel
      */
     public Object postToService(Class modelClass, Object modelObject, String servicePath) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
-        return postToService(modelClass, modelObject, null, servicePath, null);
+        return postToService(modelClass, modelObject, servicePath, null);
     }
 
     /**
@@ -305,7 +305,7 @@ public class ObjectRestClient implements ORest {
      * @return object who's type matches returningModel
      */
     public Object putToService(Class modelClass, Object modelObject, String servicePath) throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
-        return putToService(modelClass, modelObject, null, servicePath, null);
+        return putToService(modelClass, modelObject, servicePath, null);
     }
 
     /**

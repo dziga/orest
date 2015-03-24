@@ -92,7 +92,7 @@ public class ClientTest {
         customer.setCity("London");
         customer.setPostalCode(BigInteger.valueOf(200002));
 		
-        customer = (Customer) objectRestClient.postToService(Customer.class, customer, Customer.class, RestEndpoints.CUSTOMER_LIST);
+        customer = (Customer) objectRestClient.postToService(Customer.class, customer, RestEndpoints.CUSTOMER_LIST);
 
         Assert.assertEquals(1, customer.getId());
         Assert.assertEquals("John", customer.getFirstName());
@@ -117,7 +117,7 @@ public class ClientTest {
 		customer.setCity("London");
 		customer.setPostalCode(BigInteger.valueOf(200002));
 		
-        customer = (Customer) objectRestClient.putToService(Customer.class, customer, Customer.class, String.format(RestEndpoints.CUSTOMER, customer.getId()));
+        customer = (Customer) objectRestClient.putToService(Customer.class, customer, String.format(RestEndpoints.CUSTOMER, customer.getId()));
 
 		Assert.assertEquals(2, customer.getId());
 		Assert.assertEquals("John", customer.getFirstName());
@@ -175,7 +175,7 @@ public class ClientTest {
         Customer customer = new Customer();
         customer.setId(3);
 
-        Object empty = objectRestClient.putToService(Customer.class, customer, Customer.class, String.format(RestEndpoints.CUSTOMER, customer.getId()));
+        Object empty = objectRestClient.putToService(Customer.class, customer, String.format(RestEndpoints.CUSTOMER, customer.getId()));
 
         Assert.assertNotNull(customer);
     }
