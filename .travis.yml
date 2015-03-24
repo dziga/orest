@@ -1,21 +1,5 @@
 language: java
 
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "EZzMwtdvRO7nUj7F8aagtNvP+946ChCmyFpddOQHedQNzlihbsb+Du9U8F9KdcbU0WaEbnzUjXKz4B0thLVs5GiCuzZI4ch5qFPsVPw+o4c0hQB0weXrUepuMUNwbG1p9uCVmStY11fz7/pRwq2AiiuU7C9nhGp0AOfKA+hx7LI="
-
-addons:
-  coverity_scan:
-    project:
-      name: "dziga/orest"
-      description: "Simple java library for consuming rest services with java objects"
-    notification_email: 0dziga0@gmail.com
-    # build_command_prepend: "<Your build preprocessing command here>"
-    build_command:   "gradle build"
-    branch_pattern: master
-
 after_success:
 - ./gradlew cobertura coveralls
 
