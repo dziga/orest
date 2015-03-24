@@ -53,7 +53,9 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 
 @SuppressWarnings("unused")
 public class ClientTest {
-	
+
+    private ObjectRestClient objectRestClient;
+
 	@Rule
 	public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8089).notifier(
 	        new Slf4jNotifier(true)));
@@ -61,9 +63,6 @@ public class ClientTest {
 	@Test
 	public void customerApiGet() throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
 
-        ObjectRestClient objectRestClient = new ObjectRestClient(RestEndpoints.HOST);
-        objectRestClient.addHeader("Content-Type", "application/xml, application/json");
-        objectRestClient.addHeader("Accept", "application/xml, application/json");
         Customer customer = new Customer();
         customer.setId(3);
 
@@ -82,9 +81,6 @@ public class ClientTest {
 	@Test
 	public void customerApiCreate() throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
 
-        ObjectRestClient objectRestClient = new ObjectRestClient(RestEndpoints.HOST);
-        objectRestClient.addHeader("Content-Type", "application/xml, application/json");
-        objectRestClient.addHeader("Accept", "application/xml, application/json");
         Customer customer = new Customer();
         customer.setId(1);
         customer.setFirstName("John");
@@ -110,9 +106,6 @@ public class ClientTest {
 	@Test
 	public void customerApiEdit() throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
 	
-        ObjectRestClient objectRestClient = new ObjectRestClient(RestEndpoints.HOST);
-        objectRestClient.addHeader("Content-Type", "application/xml, application/json");
-        objectRestClient.addHeader("Accept", "application/xml, application/json");
         Customer customer = new Customer();
 		customer.setId(2);
 		customer.setFirstName("John");
@@ -138,9 +131,6 @@ public class ClientTest {
 	@Test
 	public void customerApiDelete() throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
 
-        ObjectRestClient objectRestClient = new ObjectRestClient(RestEndpoints.HOST);
-        objectRestClient.addHeader("Content-Type", "application/xml, application/json");
-        objectRestClient.addHeader("Accept", "application/xml, application/json");
         Customer customer = new Customer();
 		customer.setId(5);
 		
@@ -155,9 +145,6 @@ public class ClientTest {
         allExpectedHeaders.put("Content-Length", "298");
         allExpectedHeaders.put("Content-Type", "application/xml");
 
-        ObjectRestClient objectRestClient = new ObjectRestClient(RestEndpoints.HOST);
-        objectRestClient.addHeader("Content-Type", "application/xml, application/json");
-        objectRestClient.addHeader("Accept", "application/xml, application/json");
         Customer customer = new Customer();
         customer.setId(3);
 
@@ -172,9 +159,6 @@ public class ClientTest {
     @Test
     public void responseCodeAndBody() throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
 
-        ObjectRestClient objectRestClient = new ObjectRestClient(RestEndpoints.HOST);
-        objectRestClient.addHeader("Content-Type", "application/xml, application/json");
-        objectRestClient.addHeader("Accept", "application/xml, application/json");
         Customer customer = new Customer();
         customer.setId(3);
 
@@ -184,10 +168,24 @@ public class ClientTest {
         Assert.assertFalse(objectRestClient.getResponseBody().isEmpty());
         Assert.assertEquals(200, objectRestClient.getResponseCode());
     }
+
+    @Test
+    public void emptyBody() throws NoSuchAlgorithmException, KeyManagementException, JAXBException, URISyntaxException, XMLStreamException, InvalidKeyException, IOException {
+        Customer customer = new Customer();
+        customer.setId(3);
+
+        Object empty = objectRestClient.putToService(Customer.class, customer, Customer.class, String.format(RestEndpoints.CUSTOMER, customer.getId()));
+
+        Assert.assertNotNull(customer);
+    }
 	
 	@Before
 	public void setUp() {
-		
+
+        objectRestClient = new ObjectRestClient(RestEndpoints.HOST);
+        objectRestClient.addHeader("Content-Type", "application/xml, application/json");
+        objectRestClient.addHeader("Accept", "application/xml, application/json");
+
 		stubFor(get(urlEqualTo("/customers/3")).withHeader("Accept", containing("application/xml"))
 				.willReturn(
 	            aResponse()
@@ -271,5 +269,12 @@ public class ClientTest {
 	                .withStatus(200)
 	                .withHeader("Content-Type", "application/xml")
         ));
+
+        stubFor(put(urlEqualTo("/customers/8")).withHeader("Accept", containing("application/xml"))
+            .willReturn(
+                    aResponse()
+                            .withStatus(200)
+                            .withHeader("Content-Type", "application/xml")
+            ));
 	}
 }
