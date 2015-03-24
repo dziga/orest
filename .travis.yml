@@ -16,4 +16,7 @@ addons:
     build_command:   "gradle build"
     branch_pattern: master
 
+after_success:
+- ./gradlew cobertura coveralls
+
 script: "./customer-tests.sh"

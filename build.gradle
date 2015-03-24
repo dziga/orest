@@ -1,7 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
-
+apply plugin: 'cobertura'
+apply plugin: 'com.github.kt3k.coveralls'
 
 group = 'com.github.dziga'
 version = '0.2-SNAPSHOT'
@@ -12,7 +13,13 @@ buildscript{
         jcenter() 
         mavenCentral()
     }
+    dependencies {
+        classpath 'net.saliman:gradle-cobertura-plugin:2.0.0'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
+    }
 }
+
+cobertura.coverageFormats = ['html', 'xml']
 
 allprojects { 
 	repositories{
