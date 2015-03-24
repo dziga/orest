@@ -61,12 +61,6 @@ class HttpRestClient {
     private HttpResponse lastResponse;
 
 
-    public HttpRestClient(String scheme, String host, String path) {
-		this.scheme = scheme;
-		this.host = host;
-		this.path = path;
-	}
-	
 	public HttpRestClient(String host, String path) {
 		this.host = host;
 		this.path = path;
