@@ -57,7 +57,7 @@ class Marshal {
 
     public static Object toObject (String input, Class modelClass) throws JAXBException, XMLStreamException, JSONException {
         if (input == null || input.isEmpty()) {
-            return null;
+            return new Object();
         }
         if (!input.startsWith("<")) {
         	JSONObject json = new JSONObject(input);
