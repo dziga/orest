@@ -1,5 +1,5 @@
 # oRest
-[![Travis](https://img.shields.io/travis/dziga/orest.svg)]() [![Coverity Scan Build Status](https://scan.coverity.com/projects/4609/badge.svg)](https://scan.coverity.com/projects/4609)
+[![Travis](https://img.shields.io/travis/dziga/orest.svg)]() [![Coverity Scan Build Status](https://scan.coverity.com/projects/4609/badge.svg)](https://scan.coverity.com/projects/4609) [![Coverage Status](https://coveralls.io/repos/dziga/orest/badge.svg)](https://coveralls.io/r/dziga/orest)
 
 oRest is a simple utility for (un)marshaling java objects while consuming RESTful web service.
 

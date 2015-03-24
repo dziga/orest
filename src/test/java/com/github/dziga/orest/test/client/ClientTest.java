@@ -43,6 +43,10 @@ import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
@@ -142,6 +146,28 @@ public class ClientTest {
 		
 		Assert.assertTrue(objectRestClient.deleteViaService(String.format(RestEndpoints.CUSTOMER, customer.getId())) == 200);
 	}
+
+    @Test
+    public void customerHeaders() throws KeyManagementException, InvalidKeyException, NoSuchAlgorithmException, JAXBException, URISyntaxException, IOException, XMLStreamException, JSONException {
+        List<String> expectedContentTypeHeaders = new ArrayList<String>();
+        expectedContentTypeHeaders.add("application/xml");
+        Map<String, String> allExpectedHeaders = new HashMap<String, String>();
+        allExpectedHeaders.put("Content-Length", "298");
+        allExpectedHeaders.put("Content-Type", "application/xml");
+
+        ObjectRestClient objectRestClient = new ObjectRestClient(RestEndpoints.HOST);
+        objectRestClient.addHeader("Content-Type", "application/xml, application/json");
+        objectRestClient.addHeader("Accept", "application/xml, application/json");
+        Customer customer = new Customer();
+        customer.setId(3);
+
+        customer = (Customer) objectRestClient.getFromService(Customer.class, String.format(RestEndpoints.CUSTOMER, customer.getId()));
+
+        Assert.assertEquals(3, customer.getId());
+        Assert.assertTrue(objectRestClient.lastResponseContainsHeader("Content-Type"));
+        Assert.assertEquals(expectedContentTypeHeaders, objectRestClient.getLastResponseHeaderValues("Content-Type"));
+        Assert.assertEquals(2, allExpectedHeaders.size());
+    }
 	
 	@Before
 	public void setUp() {
