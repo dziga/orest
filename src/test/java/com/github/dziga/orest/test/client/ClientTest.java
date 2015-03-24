@@ -179,6 +179,19 @@ public class ClientTest {
 
         Assert.assertNotNull(customer);
     }
+
+    @Test
+    public void paramTest() throws NoSuchAlgorithmException, KeyManagementException, JAXBException, URISyntaxException, XMLStreamException, InvalidKeyException, IOException {
+        Customer customer = new Customer();
+        customer.setId(3);
+
+        HashMap<String,String> params = new HashMap<String, String>();
+        params.put("param", "do");
+
+        customer = (Customer) objectRestClient.getFromService(Customer.class, String.format(RestEndpoints.CUSTOMER, customer.getId()), params);
+
+        Assert.assertEquals(3, customer.getId());
+    }
 	
 	@Before
 	public void setUp() {
@@ -204,6 +217,17 @@ public class ClientTest {
 	                            + "<City>London</City>"
 	                            + "<PostalCode>200002</PostalCode>"
 	                            + "</Customer>")));
+
+        stubFor(get(urlEqualTo("/customers/3?param=do")).withHeader("Accept", containing("application/xml"))
+                .willReturn(
+                        aResponse()
+                                .withStatus(200)
+                                .withHeader("Content-Type", "application/xml")
+                                .withBody(
+                                        TestConstants.XML_HEADER
+                                                + "<Customer>"
+                                                + "<Id>3</Id>"
+                                                + "</Customer>")));
 		
 		stubFor(post(urlEqualTo("/customers")).withHeader("Accept", containing("application/xml"))
 				.withRequestBody(matching(
