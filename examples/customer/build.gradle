@@ -24,7 +24,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.10'
     compile 'org.slf4j:slf4j-simple:1.7.10'
     compile 'org.json:json:20140107'
-    compile 'com.github.dziga:orest:0.2-SNAPSHOT'
+    compile 'com.github.dziga:orest:0.2'
     testCompile 'junit:junit:4.11'
     testCompile 'com.github.tomakehurst:wiremock:1.53'
 }
