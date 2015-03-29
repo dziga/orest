@@ -46,6 +46,7 @@ public class ObjectRestClient implements ORest {
     private int responseCode;
     private RequestFormat requestFormat = RequestFormat.xml;
     private String namespaceUri = "";
+    private String prefix = "";
 
     /**
      * Instantiate new object rest client with host address.
@@ -122,6 +123,15 @@ public class ObjectRestClient implements ORest {
      */
     public void setNamespaceUri(String namespaceUri) {
         this.namespaceUri = namespaceUri;
+    }
+
+    /**
+     * Set namespace prefix.
+     *
+     * @param prefix namespace prefix
+     */
+    public void setNamespacePrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     /**
@@ -335,18 +345,18 @@ public class ObjectRestClient implements ORest {
         }
         else if (requestType.getRequestType().equals("POST")) {
         	if (requestFormat.getRequestFormat().equals("json")) {
-        		responseCode = rest.Post(Marshal.toJson(modelObject, modelClass, namespaceUri));
+        		responseCode = rest.Post(Marshal.toJson(modelObject, modelClass, namespaceUri, prefix));
         	}
         	else {
-        		responseCode = rest.Post(Marshal.toXml(modelObject, modelClass, namespaceUri));
+        		responseCode = rest.Post(Marshal.toXml(modelObject, modelClass, namespaceUri, prefix));
         	}
         }
         else if (requestType.getRequestType().equals("PUT")) {
         	if (requestFormat.getRequestFormat().equals("json")) {
-        		responseCode = rest.Put(Marshal.toJson(modelObject, modelClass, namespaceUri));
+        		responseCode = rest.Put(Marshal.toJson(modelObject, modelClass, namespaceUri, prefix));
         	}
         	else {
-        		responseCode = rest.Put(Marshal.toXml(modelObject, modelClass, namespaceUri));
+        		responseCode = rest.Put(Marshal.toXml(modelObject, modelClass, namespaceUri, prefix));
         	}
         }
         else if (requestType.getRequestType().equals("DELETE")) {

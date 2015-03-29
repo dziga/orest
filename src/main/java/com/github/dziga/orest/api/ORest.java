@@ -64,6 +64,13 @@ public interface ORest {
     public void setNamespaceUri(String namespaceUri);
 
     /**
+     * Set namespace prefix.
+     *
+     * @param prefix namespace prefix
+     */
+    public void setNamespacePrefix(String prefix);
+
+    /**
      * Get http last response code.
      *
      * @return last response code

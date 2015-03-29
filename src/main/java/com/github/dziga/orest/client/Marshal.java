@@ -42,13 +42,13 @@ import org.json.XML;
 
 class Marshal {
 
-    static String toXml (Object modelObject, Class modelClass, String namespaceURI) throws JAXBException {
+    static String toXml (Object modelObject, Class modelClass, String namespaceURI, String prefix) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(modelClass);
 
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         StringWriter writer = new StringWriter();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        QName qName = new QName(namespaceURI, modelClass.getSimpleName());
+        QName qName = new QName(namespaceURI, modelClass.getSimpleName(), prefix);
         JAXBElement<Object> root = new JAXBElement<Object>(qName, modelClass, modelObject);
         jaxbMarshaller.marshal(root, writer);
 
@@ -69,8 +69,8 @@ class Marshal {
         return unmarshaller.unmarshal(new StreamSource(new StringReader(input)), modelClass).getValue();
     }
 	
-	static String toJson (Object modelObject, Class modelClass, String namespaceURI) throws JAXBException, JSONException {
-		String xml = toXml(modelObject, modelClass, namespaceURI);
+	static String toJson (Object modelObject, Class modelClass, String namespaceURI, String prefix) throws JAXBException, JSONException {
+		String xml = toXml(modelObject, modelClass, namespaceURI, prefix);
 		JSONObject json = XML.toJSONObject(xml);
         return json.toString();
 	}
